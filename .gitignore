@@ -1,0 +1,27 @@
+# Node
+node_modules/
+.pnpm-store/
+dist/
+build/
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite
+.vite/
+
+# IDEs / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Coverage / Test
+coverage/
+jest-cache/
