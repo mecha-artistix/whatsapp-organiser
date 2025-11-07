@@ -25,3 +25,6 @@ Thumbs.db
 # Coverage / Test
 coverage/
 jest-cache/
+
+# WhatsApp sessions
+backend/whatsapp_sessions/
