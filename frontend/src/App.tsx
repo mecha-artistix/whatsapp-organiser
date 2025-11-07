@@ -1,12 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, type JSX } from "react";
 import socket from "./utils/socket";
+
+import DashboardLayout from "./DashboardLayout.tsx";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Whatsapp from "./features/whatsapp/Whatsapp.tsx";
 
 // wsl ip 172.23.243.156
+const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
+  const isAuthenticated = true;
+
+  return isAuthenticated ? (
+    element
+  ) : (
+    <Navigate to="/authentication/login" replace />
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ProtectedRoute element={<DashboardLayout />} />,
+    children: [{ path: "/whatsapp", element: <Whatsapp /> }],
+  },
+]);
 
 function App() {
-  // const socketRef = useRef(null);
-
   useEffect(() => {
     socket.on("connect", () => {
       console.log("Connected to server:", socket.id);
@@ -17,10 +39,9 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-gray-800 text-white min-h-screen p-8">
-      <h1>HR Dashboard</h1>
-      <Whatsapp />
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 

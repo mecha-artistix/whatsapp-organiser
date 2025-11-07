@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import WhatsappConnect from "./components/WhatsappConnect";
 import socket from "../../utils/socket";
 import { useState } from "react";
+import { usePageName } from "@/hooks/usePageName";
 
 function Whatsapp() {
+  const pageName = usePageName();
   // const [whatsappData, setWhatsappData] = useState(null);
   // const [status, setStatus] = useState("disconnected");
   const [qrCode, setQrCode] = useState("");
@@ -34,6 +36,7 @@ function Whatsapp() {
   };
   return (
     <div>
+      <h1>{pageName}</h1>
       <WhatsappConnect qrCode={qrCode} />
       <button onClick={getAllChats}>Get Chats</button>
     </div>
